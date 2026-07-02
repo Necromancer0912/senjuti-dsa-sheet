@@ -1,7 +1,7 @@
 node_modules/
 .env
-data/
-public/
+/data/
+/public/
 *.log
 .DS_Store
 dist/
