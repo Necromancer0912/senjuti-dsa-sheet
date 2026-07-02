@@ -12,10 +12,7 @@ export default function ProblemCard({ problem }) {
     toggleProblem(problem.key, !isDone);
   }
 
-  function handlePractice(e) {
-    e.stopPropagation();
-    window.open(problem.lcUrl, '_blank', 'noopener,noreferrer');
-  }
+
 
   // Map difficulty to explicit tailwind classes to prevent purging
   const diffClasses = {
@@ -52,15 +49,18 @@ export default function ProblemCard({ problem }) {
 
       {/* 3. Practice */}
       <div className="w-20 flex justify-center">
-        <button
-          onClick={handlePractice}
+        <a
+          href={problem.lcUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
           className="text-accent hover:text-accent-dim hover:underline text-[13px] font-semibold flex items-center gap-1"
         >
           Solve
           <svg width="12" height="12" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
           </svg>
-        </button>
+        </a>
       </div>
 
       {/* 4. Difficulty Tag */}
