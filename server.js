@@ -20,6 +20,14 @@ app.use(cookieSession({
   keys: [process.env.SESSION_SECRET || 'dsa-tracker-secret'],
   maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
 }));
+
+// Fix Passport 0.6.0+ compatibility with cookie-session
+app.use((req, res, next) => {
+  if (req.session && !req.session.regenerate) req.session.regenerate = (cb) => cb();
+  if (req.session && !req.session.save) req.session.save = (cb) => cb();
+  next();
+});
+
 app.use(passport.initialize());
 app.use(passport.session());
 
