@@ -54,12 +54,37 @@ const redis = (process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL
 
 const userFile = id => path.join(DATA_DIR, `${id}.json`);
 
+const migrateProg = (data) => {
+  let migrated = false;
+  const cleaned = {};
+  for (const k in data) {
+    if (k === '_avatarSeed') {
+      cleaned[k] = data[k];
+      continue;
+    }
+    const match = k.match(/^(\d+)-/);
+    if (match) {
+      cleaned[match[1]] = true;
+      migrated = true;
+    } else {
+      cleaned[k] = data[k];
+    }
+  }
+  return { cleaned, migrated };
+};
+
 const loadProg = async (id) => {
   if (redis) {
     let data = await redis.get(`user:${id}`);
     if (!data) data = {};
+    
+    const { cleaned, migrated } = migrateProg(data);
+    data = cleaned;
+
     if (!data._avatarSeed) {
       data._avatarSeed = Math.random().toString(36).substring(2, 10);
+      await redis.set(`user:${id}`, data);
+    } else if (migrated) {
       await redis.set(`user:${id}`, data);
     }
     return data;
@@ -69,19 +94,29 @@ const loadProg = async (id) => {
     try {
       if (fs.existsSync(f)) data = JSON.parse(fs.readFileSync(f, 'utf8'));
     } catch {}
+
+    const { cleaned, migrated } = migrateProg(data);
+    data = cleaned;
+
+    let needsSave = migrated;
     if (!data._avatarSeed) {
       data._avatarSeed = Math.random().toString(36).substring(2, 10);
-      fs.writeFileSync(f, JSON.stringify(data, null, 2));
+      needsSave = true;
+    }
+    if (needsSave) {
+      try { fs.writeFileSync(f, JSON.stringify(data, null, 2)); } catch (err) {}
     }
     return data;
   }
 };
 
 const saveProg = async (id, data) => {
+  // Always clean keys before saving just in case
+  const { cleaned } = migrateProg(data);
   if (redis) {
-    await redis.set(`user:${id}`, data);
+    await redis.set(`user:${id}`, cleaned);
   } else {
-    fs.writeFileSync(userFile(id), JSON.stringify(data, null, 2));
+    try { fs.writeFileSync(userFile(id), JSON.stringify(cleaned, null, 2)); } catch (err) {}
   }
 };
 
