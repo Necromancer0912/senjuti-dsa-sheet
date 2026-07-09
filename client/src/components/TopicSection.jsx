@@ -4,7 +4,7 @@ import { useApp } from '../context/AppContext';
 
 
 // Animated SVG progress ring
-function ProgressRing({ pct, color = '#a855f7', size = 44 }) {
+function ProgressRing({ pct, color = '#06b6d4', size = 44 }) {
   const r = (size - 6) / 2;
   const circ = 2 * Math.PI * r;
   const dash = circ * pct;
@@ -53,7 +53,7 @@ export default function TopicSection({ topic, problems, filters }) {
     if (hasFilter && filtered.length > 0) setOpen(true);
   }, [filters]);
 
-  const ringColor = pct === 1 ? '#10b981' : pct > 0.5 ? '#f59e0b' : '#a855f7';
+  const ringColor = pct === 1 ? '#10b981' : pct > 0.5 ? '#f59e0b' : '#06b6d4';
 
   const diffCounts = {
     Easy:   problems.filter(p => p.diff === 'Easy').length,

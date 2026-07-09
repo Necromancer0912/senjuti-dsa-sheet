@@ -38,8 +38,8 @@ export default function App() {
   return (
     <div className="flex min-h-screen" style={{ background: 'var(--bg)' }}>
       {/* Ambient background blobs */}
-      <div className="bg-blob w-96 h-96 opacity-10" style={{ background: '#a855f7', top: '-10%', left: '-5%' }} />
-      <div className="bg-blob w-80 h-80 opacity-8" style={{ background: '#6366f1', bottom: '10%', right: '-5%' }} />
+      <div className="bg-blob w-96 h-96 opacity-10" style={{ background: '#06b6d4', top: '-10%', left: '-5%' }} />
+      <div className="bg-blob w-80 h-80 opacity-8" style={{ background: '#3b82f6', bottom: '10%', right: '-5%' }} />
 
       {/* ── Sidebar ── */}
       <Sidebar />

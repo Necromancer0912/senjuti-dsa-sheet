@@ -7,25 +7,25 @@
 
 /* ── CSS Custom Properties ──────────────────────────────────────── */
 :root {
-  --bg:           #09090f;
-  --surface:      #12121a;
-  --surface-2:    #181824;
-  --surface-3:    #20202e;
+  --bg:           #06070a;
+  --surface:      #0e111a;
+  --surface-2:    #141724;
+  --surface-3:    #1c2030;
   --border:       rgba(255,255,255,0.06);
-  --border-glow:  rgba(168,85,247,0.25);
-  --accent:       #a855f7;
-  --accent-dim:   #8b5cf6;
-  --accent-glow:  rgba(168,85,247,0.15);
-  --txt-primary:  #f3f3f9;
-  --txt-secondary:#a1a1c2;
-  --txt-muted:    #626285;
+  --border-glow:  rgba(6,182,212,0.25);
+  --accent:       #06b6d4;
+  --accent-dim:   #0891b2;
+  --accent-glow:  rgba(6,182,212,0.15);
+  --txt-primary:  #f1f5f9;
+  --txt-secondary:#94a3b8;
+  --txt-muted:    #475569;
   --easy:         #10b981;
   --medium:       #f59e0b;
   --hard:         #ef4444;
   --radius-card:  18px;
   --radius-pill:  999px;
   --shadow-card:  0 4px 32px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.04) inset;
-  --shadow-glow:  0 0 40px rgba(232,93,117,0.12);
+  --shadow-glow:  0 0 40px rgba(6,182,212,0.12);
 }
 
 /* ── Base ───────────────────────────────────────────────────────── */

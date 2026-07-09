@@ -25,7 +25,7 @@ export default function ProblemCard({ problem, index }) {
         particleCount: 20,
         spread: 50,
         origin: { y: 0.6 },
-        colors: ['#a855f7', '#c084fc', '#ffffff'],
+        colors: ['#06b6d4', '#67e8f9', '#ffffff'],
         ticks: 60,
         scalar: 0.7,
       });
