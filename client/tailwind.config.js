@@ -1,47 +1,66 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
       fontFamily: {
-        sans:    ['Clash Display', 'sans-serif'],
-        display: ['Clash Display', 'sans-serif'],
+        sans:    ['Inter', 'system-ui', 'sans-serif'],
+        display: ['Clash Display', 'Inter', 'sans-serif'],
       },
       colors: {
-        bg:      '#121212', // Material Dark Theme background
-        surface: '#1e1e1e', // Elevation 1
-        card:    '#242424', // Elevation 2
-        'card-hover': '#2c2c2c', // Hover state
-        border:  'transparent', // We are removing borders mostly
-
-        accent: {
-          DEFAULT: '#f472b6', // Soft pink
-          dim:     '#ec4899', // Slightly darker pink for hover/dim
-          bg:      '#311624', // Neutral tinted background for chips
-          border:  '#4a241c', 
-        },
-
-        // Restore Monochromatic Pink/Rose Semantic colors
-        easy:   { DEFAULT: '#fbcfe8', bg: '#3b1c2b' }, // Light pink
-        medium: { DEFAULT: '#f472b6', bg: '#311624' }, // Primary pink
-        hard:   { DEFAULT: '#be185d', bg: '#240f1a' }, // Deep pink
-
+        bg:       '#0d0d12',
+        surface:  '#13131a',
+        surface2: '#1a1a24',
+        surface3: '#21212e',
+        accent:   '#e85d75',
+        'accent-dim': '#c94262',
         txt: {
-          primary: '#e0e0e0', // Material soft white
-          dim:     '#b0b0b0',
-          muted:   '#9e9e9e', // Material disabled/muted text
+          primary:   '#f0f0f6',
+          secondary: '#9999b3',
+          muted:     '#5c5c7a',
         },
-      },
-      boxShadow: {
-        'elevation-1': '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)',
-        'elevation-2': '0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12)',
-        'elevation-3': '0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12)',
+        easy:   '#22c55e',
+        medium: '#f59e0b',
+        hard:   '#ef4444',
+        border: 'rgba(255,255,255,0.06)',
       },
       borderRadius: {
-        pill: '9999px',
-        card: '24px', // Highly rounded design for cards and large elements
+        card: '18px',
+        pill: '999px',
+      },
+      boxShadow: {
+        card: '0 4px 32px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.04) inset',
+        glow: '0 0 40px rgba(232,93,117,0.12)',
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      },
+      keyframes: {
+        fadeIn: {
+          from: { opacity: '0', transform: 'translateY(8px)' },
+          to:   { opacity: '1', transform: 'translateY(0)' },
+        },
+        checkPop: {
+          '0%':   { transform: 'scale(0.5)' },
+          '70%':  { transform: 'scale(1.25)' },
+          '100%': { transform: 'scale(1)' },
+        },
+        shimmer: {
+          from: { backgroundPosition: '-200% center' },
+          to:   { backgroundPosition: '200% center' },
+        },
+      },
+      animation: {
+        'fade-in':  'fadeIn 0.3s ease forwards',
+        'check-pop': 'checkPop 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards',
       },
     },
   },
+  safelist: [
+    'text-easy', 'bg-easy/10', 'border-easy/30',
+    'text-medium', 'bg-medium/10', 'border-medium/30',
+    'text-hard', 'bg-hard/10', 'border-hard/30',
+    'badge-easy', 'badge-medium', 'badge-hard',
+  ],
   plugins: [],
 };
