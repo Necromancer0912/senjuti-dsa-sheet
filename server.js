@@ -131,10 +131,13 @@ app.get('/auth/google/callback',
 );
 
 app.get('/auth/logout', (req, res) => {
-  req.logout(() => {
-    req.session = null;
-    res.redirect('/');
-  });
+  req.session = null;
+  if (req.logout) {
+    try {
+      req.logout(() => {});
+    } catch (e) {}
+  }
+  res.redirect('/');
 });
 
 // ── API Routes ───────────────────────────────────────────────────────────────
