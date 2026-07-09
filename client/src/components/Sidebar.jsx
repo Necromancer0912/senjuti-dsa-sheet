@@ -20,7 +20,7 @@ export default function Sidebar() {
   const handleLogout = () => { window.location.href = '/auth/logout'; };
 
   const avatarUrl = user?.avatarSeed
-    ? `https://api.dicebear.com/9.x/shapes/svg?seed=${user.avatarSeed}&backgroundColor=0c1c28,040c1a&shapeColor=06b6d4,0891b2`
+    ? `https://api.dicebear.com/9.x/shapes/svg?seed=${user.avatarSeed}&backgroundColor=0a172c,040d1a&shapeColor=3b82f6,2563eb`
     : null;
 
   return (
@@ -120,7 +120,7 @@ export default function Sidebar() {
                     className="h-full rounded-full transition-all duration-500"
                     style={{
                       width: `${pct * 100}%`,
-                      background: pct === 1 ? '#10b981' : pct > 0.5 ? '#f59e0b' : '#06b6d4'
+                      background: pct === 1 ? '#10b981' : pct > 0.5 ? '#f59e0b' : '#3b82f6'
                     }}
                   />
                 </div>

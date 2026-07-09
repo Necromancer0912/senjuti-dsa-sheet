@@ -8,12 +8,12 @@ export default {
         display: ['Clash Display', 'Inter', 'sans-serif'],
       },
       colors: {
-        bg:       '#06070a',
-        surface:  '#0e111a',
-        surface2: '#141724',
-        surface3: '#1c2030',
-        accent:   '#06b6d4',
-        'accent-dim': '#0891b2',
+        bg:       '#06080e',
+        surface:  '#0e121f',
+        surface2: '#151b2e',
+        surface3: '#1d243d',
+        accent:   '#3b82f6',
+        'accent-dim': '#2563eb',
         txt: {
           primary:   '#f1f5f9',
           secondary: '#94a3b8',
