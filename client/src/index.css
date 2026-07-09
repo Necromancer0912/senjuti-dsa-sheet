@@ -7,19 +7,19 @@
 
 /* ── CSS Custom Properties ──────────────────────────────────────── */
 :root {
-  --bg:           #0d0d12;
-  --surface:      #13131a;
-  --surface-2:    #1a1a24;
-  --surface-3:    #21212e;
+  --bg:           #09090f;
+  --surface:      #12121a;
+  --surface-2:    #181824;
+  --surface-3:    #20202e;
   --border:       rgba(255,255,255,0.06);
-  --border-glow:  rgba(232,93,117,0.25);
-  --accent:       #e85d75;
-  --accent-dim:   #c94262;
-  --accent-glow:  rgba(232,93,117,0.15);
-  --txt-primary:  #f0f0f6;
-  --txt-secondary:#9999b3;
-  --txt-muted:    #5c5c7a;
-  --easy:         #22c55e;
+  --border-glow:  rgba(168,85,247,0.25);
+  --accent:       #a855f7;
+  --accent-dim:   #8b5cf6;
+  --accent-glow:  rgba(168,85,247,0.15);
+  --txt-primary:  #f3f3f9;
+  --txt-secondary:#a1a1c2;
+  --txt-muted:    #626285;
+  --easy:         #10b981;
   --medium:       #f59e0b;
   --hard:         #ef4444;
   --radius-card:  18px;

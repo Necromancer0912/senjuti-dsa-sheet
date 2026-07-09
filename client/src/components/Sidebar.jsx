@@ -1,17 +1,18 @@
 import { useApp } from '../context/AppContext';
-import { PROBLEMS, TOPICS, TOPIC_ICONS } from '../data/problems';
+import { PROBLEMS, TOPICS } from '../data/problems';
+import TopicIcon from './TopicIcon';
 
 export default function Sidebar() {
   const { user, progress, loading } = useApp();
 
-  const totalDone  = PROBLEMS.filter(p => progress[p.key]).length;
+  const totalDone  = PROBLEMS.filter(p => progress[p.id]).length;
   const totalCount = PROBLEMS.length;
   const pct = totalCount ? Math.round((totalDone / totalCount) * 100) : 0;
 
   // Per-topic stats
   const topicStats = TOPICS.map(topic => {
     const probs = PROBLEMS.filter(p => p.topic === topic);
-    const done  = probs.filter(p => progress[p.key]).length;
+    const done  = probs.filter(p => progress[p.id]).length;
     return { topic, done, total: probs.length, pct: probs.length ? done / probs.length : 0 };
   });
 
@@ -19,7 +20,7 @@ export default function Sidebar() {
   const handleLogout = () => { window.location.href = '/auth/logout'; };
 
   const avatarUrl = user?.avatarSeed
-    ? `https://api.dicebear.com/9.x/shapes/svg?seed=${user.avatarSeed}&backgroundColor=1a0a12,0d0512&shapeColor=e85d75,c94262`
+    ? `https://api.dicebear.com/9.x/shapes/svg?seed=${user.avatarSeed}&backgroundColor=1a0a28,0d051c&shapeColor=a855f7,8b5cf6`
     : null;
 
   return (
@@ -106,7 +107,9 @@ export default function Sidebar() {
         <nav className="space-y-0.5">
           {topicStats.map(({ topic, done, total, pct }) => (
             <div key={topic} className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-surface2 transition-colors group cursor-pointer">
-              <span className="text-base leading-none">{TOPIC_ICONS[topic] || '📁'}</span>
+              <span className="text-txt-secondary group-hover:text-accent transition-colors flex-shrink-0">
+                <TopicIcon topic={topic} className="w-4 h-4" />
+              </span>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-[12px] font-medium text-txt-secondary group-hover:text-txt-primary transition-colors truncate">{topic}</span>
@@ -117,7 +120,7 @@ export default function Sidebar() {
                     className="h-full rounded-full transition-all duration-500"
                     style={{
                       width: `${pct * 100}%`,
-                      background: pct === 1 ? '#22c55e' : pct > 0.5 ? '#f59e0b' : '#e85d75'
+                      background: pct === 1 ? '#10b981' : pct > 0.5 ? '#f59e0b' : '#a855f7'
                     }}
                   />
                 </div>

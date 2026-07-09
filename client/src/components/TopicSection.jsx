@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
 import ProblemCard from './ProblemCard';
 import { useApp } from '../context/AppContext';
-import { TOPIC_ICONS } from '../data/problems';
+
 
 // Animated SVG progress ring
-function ProgressRing({ pct, color = '#e85d75', size = 44 }) {
+function ProgressRing({ pct, color = '#a855f7', size = 44 }) {
   const r = (size - 6) / 2;
   const circ = 2 * Math.PI * r;
   const dash = circ * pct;
@@ -24,6 +24,8 @@ function ProgressRing({ pct, color = '#e85d75', size = 44 }) {
   );
 }
 
+import TopicIcon from './TopicIcon';
+
 export default function TopicSection({ topic, problems, filters }) {
   const { progress } = useApp();
   const [open, setOpen] = useState(false);
@@ -32,8 +34,8 @@ export default function TopicSection({ topic, problems, filters }) {
   // Filtered problems for display
   const filtered = problems.filter(p => {
     if (filters.diff !== 'all' && p.diff !== filters.diff) return false;
-    if (filters.status === 'done'    && !progress[p.key]) return false;
-    if (filters.status === 'pending' &&  progress[p.key]) return false;
+    if (filters.status === 'done'    && !progress[p.id]) return false;
+    if (filters.status === 'pending' &&  progress[p.id]) return false;
     if (filters.query) {
       const q = filters.query.toLowerCase();
       if (!p.title.toLowerCase().includes(q) && !String(p.id).includes(q)) return false;
@@ -42,7 +44,7 @@ export default function TopicSection({ topic, problems, filters }) {
   });
 
   const total = problems.length;
-  const done  = problems.filter(p => progress[p.key]).length;
+  const done  = problems.filter(p => progress[p.id]).length;
   const pct   = total ? done / total : 0;
 
   // Auto-open if search/filter is active and there are matches
@@ -51,9 +53,7 @@ export default function TopicSection({ topic, problems, filters }) {
     if (hasFilter && filtered.length > 0) setOpen(true);
   }, [filters]);
 
-  const icon = TOPIC_ICONS[topic] || '📁';
-
-  const ringColor = pct === 1 ? '#22c55e' : pct > 0.5 ? '#f59e0b' : '#e85d75';
+  const ringColor = pct === 1 ? '#10b981' : pct > 0.5 ? '#f59e0b' : '#a855f7';
 
   const diffCounts = {
     Easy:   problems.filter(p => p.diff === 'Easy').length,
@@ -67,7 +67,9 @@ export default function TopicSection({ topic, problems, filters }) {
       <div className="topic-header" onClick={() => setOpen(o => !o)}>
         {/* Icon + Title */}
         <div className="flex items-center gap-3 flex-1 min-w-0">
-          <span className="text-xl leading-none">{icon}</span>
+          <span className="text-accent flex-shrink-0">
+            <TopicIcon topic={topic} className="w-5 h-5" />
+          </span>
           <div className="min-w-0">
             <h2 className="font-display text-[16px] font-600 text-txt-primary truncate m-0 leading-tight">{topic}</h2>
             <div className="flex items-center gap-3 mt-1">

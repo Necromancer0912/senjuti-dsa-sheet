@@ -5,7 +5,7 @@ import confetti from 'canvas-confetti';
 
 export default function ProblemCard({ problem, index }) {
   const { progress, toggleProblem } = useApp();
-  const isDone = !!progress[problem.key];
+  const isDone = !!progress[problem.id];
   const [animating, setAnimating] = useState(false);
   const checkRef = useRef(null);
 
@@ -25,13 +25,13 @@ export default function ProblemCard({ problem, index }) {
         particleCount: 20,
         spread: 50,
         origin: { y: 0.6 },
-        colors: ['#e85d75', '#ff9eb5', '#ffffff'],
+        colors: ['#a855f7', '#c084fc', '#ffffff'],
         ticks: 60,
         scalar: 0.7,
       });
     }
-    toggleProblem(problem.key, !isDone);
-  }, [isDone, problem.key, toggleProblem]);
+    toggleProblem(problem.id, !isDone);
+  }, [isDone, problem.id, toggleProblem]);
 
   return (
     <div

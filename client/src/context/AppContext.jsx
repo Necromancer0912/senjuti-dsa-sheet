@@ -8,12 +8,28 @@ const initialState = {
   loading:  true,
 };
 
+function normalizeProgress(progress) {
+  if (!progress) return {};
+  const normalized = {};
+  for (const k in progress) {
+    if (progress[k]) {
+      const match = k.match(/^(\d+)-/);
+      if (match) {
+        normalized[match[1]] = true;
+      } else {
+        normalized[k] = true;
+      }
+    }
+  }
+  return normalized;
+}
+
 function reducer(state, action) {
   switch (action.type) {
     case 'SET_USER':
-      return { ...state, user: action.user, progress: action.progress, loading: false };
+      return { ...state, user: action.user, progress: normalizeProgress(action.progress), loading: false };
     case 'SET_PROGRESS':
-      return { ...state, progress: action.progress };
+      return { ...state, progress: normalizeProgress(action.progress) };
     case 'TOGGLE_PROBLEM': {
       const p = { ...state.progress };
       if (action.done) p[action.key] = true;

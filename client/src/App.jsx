@@ -17,7 +17,7 @@ export default function App() {
     return map;
   }, []);
 
-  const totalDone  = PROBLEMS.filter(p => progress[p.key]).length;
+  const totalDone  = PROBLEMS.filter(p => progress[p.id]).length;
   const totalCount = PROBLEMS.length;
 
   // Decide which topics have visible results given the current filter
@@ -25,8 +25,8 @@ export default function App() {
     const probs = problemsByTopic[topic] || [];
     return probs.some(p => {
       if (filters.diff !== 'all' && p.diff !== filters.diff) return false;
-      if (filters.status === 'done'    && !progress[p.key]) return false;
-      if (filters.status === 'pending' &&  progress[p.key]) return false;
+      if (filters.status === 'done'    && !progress[p.id]) return false;
+      if (filters.status === 'pending' &&  progress[p.id]) return false;
       if (filters.query) {
         const q = filters.query.toLowerCase();
         if (!p.title.toLowerCase().includes(q) && !String(p.id).includes(q)) return false;
@@ -38,8 +38,8 @@ export default function App() {
   return (
     <div className="flex min-h-screen" style={{ background: 'var(--bg)' }}>
       {/* Ambient background blobs */}
-      <div className="bg-blob w-96 h-96 opacity-10" style={{ background: '#e85d75', top: '-10%', left: '-5%' }} />
-      <div className="bg-blob w-80 h-80 opacity-8" style={{ background: '#7c3aed', bottom: '10%', right: '-5%' }} />
+      <div className="bg-blob w-96 h-96 opacity-10" style={{ background: '#a855f7', top: '-10%', left: '-5%' }} />
+      <div className="bg-blob w-80 h-80 opacity-8" style={{ background: '#6366f1', bottom: '10%', right: '-5%' }} />
 
       {/* ── Sidebar ── */}
       <Sidebar />
@@ -90,7 +90,9 @@ export default function App() {
 
               {visibleTopics.length === 0 && (filters.diff !== 'all' || filters.status !== 'all' || filters.query) && (
                 <div className="text-center py-16">
-                  <div className="text-4xl mb-3">🔍</div>
+                  <svg className="w-10 h-10 text-txt-muted mx-auto mb-3" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" />
+                  </svg>
                   <p className="text-txt-secondary font-medium">No problems found</p>
                   <p className="text-txt-muted text-sm mt-1">Try adjusting your filters</p>
                 </div>
